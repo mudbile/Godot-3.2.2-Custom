@@ -1,5 +1,5 @@
 /*************************************************************************/
-/*  register_scene_types.cpp  for kanji                                  */
+/*  register_scene_types.cpp  for up goblin                    */
 /*************************************************************************/
 /*                       This file is part of:                           */
 /*                           GODOT ENGINE                                */
@@ -696,8 +696,8 @@ void register_scene_types() {
 	ClassDB::register_virtual_class<Font>();
 #ifndef ADVANCED_GUI_DISABLED
 		ClassDB::register_class<BitmapFont>();
-#endif
 		ClassDB::register_class<Curve>();
+#endif
 	
 	ClassDB::register_class<TextFile>();
 
@@ -740,11 +740,11 @@ void register_scene_types() {
 		ClassDB::register_class<ConcavePolygonShape2D>();
 		ClassDB::register_class<Path2D>();
 		ClassDB::register_class<PathFollow2D>();
+		ClassDB::register_class<Curve2D>();
 		ClassDB::register_class<Navigation2D>();
 		ClassDB::register_class<NavigationPolygon>();
 		ClassDB::register_class<NavigationPolygonInstance>();
 #endif
-	ClassDB::register_class<Curve2D>();
 	OS::get_singleton()->yield(); //may take time to init
 
 	ClassDB::register_virtual_class<SceneState>();

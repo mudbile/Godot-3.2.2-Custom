@@ -1,5 +1,5 @@
 /*************************************************************************/
-/*  register_scene_types.cpp  for kanji                                  */
+/*  register_scene_types.cpp  for colour crisis                          */
 /*************************************************************************/
 /*                       This file is part of:                           */
 /*                           GODOT ENGINE                                */
@@ -264,8 +264,9 @@ void register_scene_types() {
 
 	ClassDB::register_class<Viewport>();
 	ClassDB::register_class<ViewportTexture>();
-	
-	ClassDB::register_class<HTTPRequest>();
+#ifndef ADVANCED_GUI_DISABLED
+		ClassDB::register_class<HTTPRequest>();
+#endif
 	ClassDB::register_class<Timer>();
 	ClassDB::register_class<CanvasLayer>();
 	ClassDB::register_class<CanvasModulate>();
@@ -370,42 +371,45 @@ void register_scene_types() {
 
 	/* REGISTER 3D */
 
-	ClassDB::register_class<Skin>();
-	ClassDB::register_virtual_class<SkinReference>();
+#ifndef ADVANCED_GUI_DISABLED
+		ClassDB::register_class<Skin>();
+		ClassDB::register_virtual_class<SkinReference>();
 
-	ClassDB::register_class<Spatial>();
-	ClassDB::register_virtual_class<SpatialGizmo>();
-	ClassDB::register_class<Skeleton>();
-	ClassDB::register_class<AnimationPlayer>();
+		ClassDB::register_class<Spatial>();
+		ClassDB::register_virtual_class<SpatialGizmo>();
+		ClassDB::register_class<Skeleton>();
+		ClassDB::register_class<AnimationPlayer>();
+#endif
 
 	ClassDB::register_class<Tween>();
 
-	ClassDB::register_class<AnimationTreePlayer>();
-	ClassDB::register_class<AnimationTree>();
-	ClassDB::register_class<AnimationNode>();
-	ClassDB::register_class<AnimationRootNode>();
-	ClassDB::register_class<AnimationNodeBlendTree>();
-	ClassDB::register_class<AnimationNodeBlendSpace1D>();
-	ClassDB::register_class<AnimationNodeBlendSpace2D>();
-	ClassDB::register_class<AnimationNodeStateMachine>();
-	ClassDB::register_class<AnimationNodeStateMachinePlayback>();
+#ifndef ADVANCED_GUI_DISABLED
+		ClassDB::register_class<AnimationTreePlayer>();
+		ClassDB::register_class<AnimationTree>();
+		ClassDB::register_class<AnimationNode>();
+		ClassDB::register_class<AnimationRootNode>();
+		ClassDB::register_class<AnimationNodeBlendTree>();
+		ClassDB::register_class<AnimationNodeBlendSpace1D>();
+		ClassDB::register_class<AnimationNodeBlendSpace2D>();
+		ClassDB::register_class<AnimationNodeStateMachine>();
+		ClassDB::register_class<AnimationNodeStateMachinePlayback>();
 
-	ClassDB::register_class<AnimationNodeStateMachineTransition>();
-	ClassDB::register_class<AnimationNodeOutput>();
-	ClassDB::register_class<AnimationNodeOneShot>();
-	ClassDB::register_class<AnimationNodeAnimation>();
-	ClassDB::register_class<AnimationNodeAdd2>();
-	ClassDB::register_class<AnimationNodeAdd3>();
-	ClassDB::register_class<AnimationNodeBlend2>();
-	ClassDB::register_class<AnimationNodeBlend3>();
-	ClassDB::register_class<AnimationNodeTimeScale>();
-	ClassDB::register_class<AnimationNodeTimeSeek>();
-	ClassDB::register_class<AnimationNodeTransition>();
-
+		ClassDB::register_class<AnimationNodeStateMachineTransition>();
+		ClassDB::register_class<AnimationNodeOutput>();
+		ClassDB::register_class<AnimationNodeOneShot>();
+		ClassDB::register_class<AnimationNodeAnimation>();
+		ClassDB::register_class<AnimationNodeAdd2>();
+		ClassDB::register_class<AnimationNodeAdd3>();
+		ClassDB::register_class<AnimationNodeBlend2>();
+		ClassDB::register_class<AnimationNodeBlend3>();
+		ClassDB::register_class<AnimationNodeTimeScale>();
+		ClassDB::register_class<AnimationNodeTimeSeek>();
+		ClassDB::register_class<AnimationNodeTransition>();
+#endif
 	OS::get_singleton()->yield(); //may take time to init
 	
-	ClassDB::register_class<Particles>();
-	ClassDB::register_class<CPUParticles>();
+	// ClassDB::register_class<Particles>();
+	// ClassDB::register_class<CPUParticles>();
 
 #ifndef _3D_DISABLED
 	ClassDB::register_virtual_class<VisualInstance>();
@@ -551,13 +555,14 @@ void register_scene_types() {
 		ClassDB::register_class<VisualShaderNodeIs>();
 		ClassDB::register_class<VisualShaderNodeCompare>();
 
-		
+		ClassDB::register_class<ShaderMaterial>();
 #endif
-	ClassDB::register_class<ShaderMaterial>();
 	ClassDB::register_virtual_class<CanvasItem>();
-	ClassDB::register_class<CanvasItemMaterial>();
-	SceneTree::add_idle_callback(CanvasItemMaterial::flush_changes);
-	CanvasItemMaterial::init_shaders();
+#ifndef ADVANCED_GUI_DISABLED
+		ClassDB::register_class<CanvasItemMaterial>();
+		SceneTree::add_idle_callback(CanvasItemMaterial::flush_changes);
+		CanvasItemMaterial::init_shaders();
+#endif
 	ClassDB::register_class<Node2D>();
 	ClassDB::register_class<CPUParticles2D>();
 	ClassDB::register_class<Particles2D>();
@@ -566,31 +571,33 @@ void register_scene_types() {
 		//ClassDB::register_class<ParticleAttractor2D>();
 #endif
 	ClassDB::register_class<Sprite>();
-	//ClassDB::register_type<ViewportSprite>();
-	ClassDB::register_class<SpriteFrames>();
-	ClassDB::register_class<AnimatedSprite>();
-	ClassDB::register_class<Position2D>();
-	ClassDB::register_class<Line2D>();
-	
-	ClassDB::register_class<MeshInstance2D>();
-	ClassDB::register_class<MultiMeshInstance2D>();
-
-	ClassDB::register_virtual_class<PhysicsBody2D>();
-	ClassDB::register_class<StaticBody2D>();
-	ClassDB::register_class<RigidBody2D>();
-	ClassDB::register_class<KinematicBody2D>();
-	ClassDB::register_class<KinematicCollision2D>();
+#ifndef ADVANCED_GUI_DISABLED
+		//ClassDB::register_type<ViewportSprite>();
+		ClassDB::register_class<SpriteFrames>();
+		ClassDB::register_class<AnimatedSprite>();
+		ClassDB::register_class<Position2D>();
+		ClassDB::register_class<Line2D>();
 		
-	ClassDB::register_class<RayCast2D>();
-	ClassDB::register_class<VisibilityNotifier2D>();
-	ClassDB::register_class<VisibilityEnabler2D>();
-	ClassDB::register_class<Polygon2D>();
-	ClassDB::register_class<Skeleton2D>();
-	ClassDB::register_class<Bone2D>();
-	ClassDB::register_class<Light2D>();
-	ClassDB::register_class<LightOccluder2D>();
-	ClassDB::register_class<OccluderPolygon2D>();
-	
+		ClassDB::register_class<MeshInstance2D>();
+		ClassDB::register_class<MultiMeshInstance2D>();
+
+		ClassDB::register_virtual_class<PhysicsBody2D>();
+		ClassDB::register_class<StaticBody2D>();
+		ClassDB::register_class<RigidBody2D>();
+		ClassDB::register_class<KinematicBody2D>();
+		ClassDB::register_class<KinematicCollision2D>();
+			
+		ClassDB::register_class<RayCast2D>();
+		ClassDB::register_class<VisibilityNotifier2D>();
+		ClassDB::register_class<VisibilityEnabler2D>();
+		ClassDB::register_class<Polygon2D>();
+		ClassDB::register_class<Skeleton2D>();
+		ClassDB::register_class<Bone2D>();
+		ClassDB::register_class<Light2D>();
+		ClassDB::register_class<LightOccluder2D>();
+		ClassDB::register_class<OccluderPolygon2D>();
+		
+#endif
 	ClassDB::register_virtual_class<CollisionObject2D>();
 	ClassDB::register_class<Area2D>();
 	ClassDB::register_class<CollisionShape2D>();
@@ -601,6 +608,7 @@ void register_scene_types() {
 
 	OS::get_singleton()->yield(); //may take time to init
 #ifndef ADVANCED_GUI_DISABLED
+		
 		ClassDB::register_class<Camera2D>();
 		ClassDB::register_virtual_class<Joint2D>();
 		ClassDB::register_class<PinJoint2D>();
@@ -622,11 +630,13 @@ void register_scene_types() {
 	ClassDB::register_class<ParticlesMaterial>();
 	SceneTree::add_idle_callback(ParticlesMaterial::flush_changes);
 	ParticlesMaterial::init_shaders();
-	ClassDB::register_virtual_class<Mesh>();
-	ClassDB::register_class<ArrayMesh>();
-	ClassDB::register_class<MultiMesh>();
-	ClassDB::register_class<SurfaceTool>();
-	ClassDB::register_class<MeshDataTool>();
+#ifndef ADVANCED_GUI_DISABLED
+		ClassDB::register_virtual_class<Mesh>();
+		ClassDB::register_class<ArrayMesh>();
+		ClassDB::register_class<MultiMesh>();
+		ClassDB::register_class<SurfaceTool>();
+		ClassDB::register_class<MeshDataTool>();
+#endif
 
 #ifndef _3D_DISABLED
 	ClassDB::register_virtual_class<PrimitiveMesh>();
@@ -663,24 +673,25 @@ void register_scene_types() {
 	ClassDB::register_class<SpatialVelocityTracker>();
 
 #endif
-
-	ClassDB::register_class<PhysicsMaterial>();
-	ClassDB::register_class<World>();
+#ifndef ADVANCED_GUI_DISABLED
+		ClassDB::register_class<PhysicsMaterial>();
+		ClassDB::register_class<World>();
+#endif
 	ClassDB::register_class<Environment>();
 #ifndef ADVANCED_GUI_DISABLED
 		ClassDB::register_class<World2D>();
 #endif
 	ClassDB::register_virtual_class<Texture>();
-	ClassDB::register_virtual_class<Sky>();
-	ClassDB::register_class<PanoramaSky>();
-	ClassDB::register_class<ProceduralSky>();
+#ifndef ADVANCED_GUI_DISABLED
+		ClassDB::register_virtual_class<Sky>();
+		ClassDB::register_class<PanoramaSky>();
+		ClassDB::register_class<ProceduralSky>();
+#endif
 	ClassDB::register_class<StreamTexture>();
 	ClassDB::register_class<ImageTexture>();
-	
-	ClassDB::register_class<MeshTexture>();
-	ClassDB::register_class<Texture3D>();
 #ifndef ADVANCED_GUI_DISABLED
 		ClassDB::register_class<AtlasTexture>();
+		ClassDB::register_class<MeshTexture>();
 		ClassDB::register_class<LargeTexture>();
 		ClassDB::register_class<CurveTexture>();
 		ClassDB::register_class<GradientTexture>();
@@ -690,14 +701,16 @@ void register_scene_types() {
 		ClassDB::register_class<ExternalTexture>();
 		ClassDB::register_class<CubeMap>();
 		ClassDB::register_virtual_class<TextureLayered>();
+		ClassDB::register_class<Texture3D>();
 		ClassDB::register_class<TextureArray>();
 		ClassDB::register_class<Animation>();
 #endif
 	ClassDB::register_virtual_class<Font>();
 #ifndef ADVANCED_GUI_DISABLED
 		ClassDB::register_class<BitmapFont>();
-#endif
 		ClassDB::register_class<Curve>();
+		
+#endif
 	
 	ClassDB::register_class<TextFile>();
 
@@ -713,14 +726,19 @@ void register_scene_types() {
 	ClassDB::register_class<StyleBoxLine>();
 	ClassDB::register_class<Theme>();
 	ClassDB::register_class<Gradient>();
-	ClassDB::register_class<PolygonPathFinder>();
-	ClassDB::register_class<BitMap>();
-	
+#ifndef ADVANCED_GUI_DISABLED
+		ClassDB::register_class<PolygonPathFinder>();
+		ClassDB::register_class<BitMap>();
+		
+#endif
+
 	OS::get_singleton()->yield(); //may take time to init
 
 	ClassDB::register_class<AudioStreamPlayer>();
 	ClassDB::register_class<AudioStreamPlayer2D>();
+#ifndef _3D_DISABLED
 	ClassDB::register_class<AudioStreamPlayer3D>();
+#endif
 #ifndef ADVANCED_GUI_DISABLED
 		ClassDB::register_virtual_class<VideoStream>();
 #endif
@@ -740,11 +758,11 @@ void register_scene_types() {
 		ClassDB::register_class<ConcavePolygonShape2D>();
 		ClassDB::register_class<Path2D>();
 		ClassDB::register_class<PathFollow2D>();
+		ClassDB::register_class<Curve2D>();
 		ClassDB::register_class<Navigation2D>();
 		ClassDB::register_class<NavigationPolygon>();
 		ClassDB::register_class<NavigationPolygonInstance>();
 #endif
-	ClassDB::register_class<Curve2D>();
 	OS::get_singleton()->yield(); //may take time to init
 
 	ClassDB::register_virtual_class<SceneState>();

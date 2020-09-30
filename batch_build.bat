@@ -6,12 +6,12 @@
 
 @echo off
 set /p num_cores="Number of cores to use: "
-echo "  "
+echo .
 REM echo "Compiling editor..."
 
 REM CALL scons -j %num_cores% platform=windows target=release_debug 
-
-set batch_args= tools=no xml=no disable_3d=yes ^
+REM NOTE turn disable_3d off for 3d games!
+set batch_args= tools=no xml=no disable_3d=no ^
      disable_advanced_gui=yes module_bullet_enabled=no builtin_bullet=no builtin_enet=no ^
      builtin_libtheora=no builtin_libvpx=no builtin_libwebp=no  builtin_recast=no ^
 	 builtin_thekla_atlas=no builtin_pcre2=no builtin_opus=no builtin_openssl=no ^
@@ -35,9 +35,9 @@ echo Compiling debug template...
 CALL scons -j %num_cores% platform=windows target=release_debug tools=no %batch_args%
 echo.	
  
-echo Compiling release template...
-CALL scons -j %num_cores% platform=windows target=release tools=no %batch_args%
-echo.
+REM echo Compiling release template...
+REM CALL scons -j %num_cores% platform=windows target=release tools=no %batch_args%
+REM echo.
 
 REM echo Compiling android debug template...
 REM echo.   - armv7
