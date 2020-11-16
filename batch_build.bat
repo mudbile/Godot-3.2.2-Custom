@@ -7,11 +7,11 @@
 @echo off
 set /p num_cores="Number of cores to use: "
 echo .
-REM echo "Compiling editor..."
+echo "Compiling editor..."
 
 REM CALL scons -j %num_cores% platform=windows target=release_debug 
 REM NOTE turn disable_3d off for 3d games!
-set batch_args= tools=no xml=no disable_3d=no ^
+set batch_args= tools=no xml=no disable_3d=yes ^
      disable_advanced_gui=yes module_bullet_enabled=no builtin_bullet=no builtin_enet=no ^
      builtin_libtheora=no builtin_libvpx=no builtin_libwebp=no  builtin_recast=no ^
 	 builtin_thekla_atlas=no builtin_pcre2=no builtin_opus=no builtin_openssl=no ^
@@ -31,42 +31,42 @@ set batch_args= tools=no xml=no disable_3d=no ^
 
 
 
-echo Compiling debug template...
-CALL scons -j %num_cores% platform=windows target=release_debug tools=no %batch_args%
-echo.	
+REM echo Compiling debug template...
+REM CALL scons -j %num_cores% platform=windows target=release_debug tools=no %batch_args%
+REM echo.	
  
-REM echo Compiling release template...
-REM CALL scons -j %num_cores% platform=windows target=release tools=no %batch_args%
-REM echo.
+echo Compiling release template...
+CALL scons -j %num_cores% platform=windows target=release tools=no %batch_args%
+echo.
 
-REM echo Compiling android debug template...
-REM echo.   - armv7
-REM CALL scons -j %num_cores% platform=android target=release_debug android_arch=armv7 %%batch_args%%
-REM echo.   - armv8
-REM CALL scons -j %num_cores% platform=android target=release_debug android_arch=arm64v8 %%batch_args%%
-REM echo.   - x86
-REM CALL scons -j %num_cores% platform=android target=release_debug android_arch=x86 %%batch_args%%
-REM echo.   - x86_64
-REM CALL scons -j %num_cores% platform=android target=release_debug android_arch=x86_64 %%batch_args%%
-REM cd platform/android/java
-REM CALL .\gradlew generateGodotTemplates
-REM cd ..
-REM cd ..
-REM cd ..
-REM echo.
+echo Compiling android debug template...
+echo.   - armv7
+CALL scons -j %num_cores% platform=android target=release_debug android_arch=armv7 %%batch_args%%
+echo.   - armv8
+CALL scons -j %num_cores% platform=android target=release_debug android_arch=arm64v8 %%batch_args%%
+echo.   - x86
+CALL scons -j %num_cores% platform=android target=release_debug android_arch=x86 %%batch_args%%
+echo.   - x86_64
+CALL scons -j %num_cores% platform=android target=release_debug android_arch=x86_64 %%batch_args%%
+cd platform/android/java
+CALL .\gradlew generateGodotTemplates
+cd ..
+cd ..
+cd ..
+echo.
 
-REM echo Compiling android release template...
-REM echo.   - armv7
-REM CALL scons -j %num_cores% platform=android target=release android_arch=armv7 %%batch_args%%
-REM echo.   - armv8
-REM CALL scons -j %num_cores% platform=android target=release android_arch=arm64v8 %%batch_args%%
-REM echo.   - x86
-REM CALL scons -j %num_cores% platform=android target=release android_arch=x86 %%batch_args%%
-REM echo.   - x86_64
-REM CALL scons -j %num_cores% platform=android target=release android_arch=x86_64 %%batch_args%%
-REM cd platform/android/java
-REM CALL .\gradlew generateGodotTemplates
-REM cd ..
-REM cd ..
-REM cd ..
+echo Compiling android release template...
+echo.   - armv7
+CALL scons -j %num_cores% platform=android target=release android_arch=armv7 %%batch_args%%
+echo.   - armv8
+CALL scons -j %num_cores% platform=android target=release android_arch=arm64v8 %%batch_args%%
+echo.   - x86
+CALL scons -j %num_cores% platform=android target=release android_arch=x86 %%batch_args%%
+echo.   - x86_64
+CALL scons -j %num_cores% platform=android target=release android_arch=x86_64 %%batch_args%%
+cd platform/android/java
+CALL .\gradlew generateGodotTemplates
+cd ..
+cd ..
+cd ..
 echo Finished batch build!
