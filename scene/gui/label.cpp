@@ -377,7 +377,9 @@ int Label::get_visible_line_count() const {
 }
 
 void Label::regenerate_word_cache() {
-
+	
+	wrapped_text.clear();
+	
 	while (word_cache) {
 
 		WordCache *current = word_cache;
@@ -508,8 +510,31 @@ void Label::regenerate_word_cache() {
 		}
 	}
 
-	if (!autowrap)
+	if (!autowrap) {
 		minsize.width = width;
+		wrapped_text = text;
+	} else {
+		WordCache *wc = word_cache;
+		while (wc) {
+			if (wc->char_pos < 0) {
+				wrapped_text += "\n";
+			} else {
+			
+				for (int i=0; i != wc->space_count; i++){
+					wrapped_text += " ";
+				}
+				
+				int pos = wc->char_pos;
+				for (int i = 0; i < wc->word_len; i++) {
+					char32_t current = xl_text[i + pos];
+					if (current != ' ') {
+						wrapped_text += current;
+					}
+				}
+			}
+			wc = wc->next;
+		}
+	}
 
 	if (max_lines_visible > 0 && line_count > max_lines_visible) {
 		minsize.height = (font->get_height() * max_lines_visible) + (line_spacing * (max_lines_visible - 1));
@@ -643,8 +668,14 @@ int Label::get_total_character_count() const {
 	return total_char_cache;
 }
 
-void Label::_bind_methods() {
+String Label::get_wrapped_text() const {
+	return wrapped_text;
+}
 
+
+void Label::_bind_methods() {
+	ClassDB::bind_method(D_METHOD("get_wrapped_text"), &Label::get_wrapped_text);
+	
 	ClassDB::bind_method(D_METHOD("set_align", "align"), &Label::set_align);
 	ClassDB::bind_method(D_METHOD("get_align"), &Label::get_align);
 	ClassDB::bind_method(D_METHOD("set_valign", "valign"), &Label::set_valign);

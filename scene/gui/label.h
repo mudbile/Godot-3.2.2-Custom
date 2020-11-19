@@ -97,6 +97,8 @@ private:
 	int visible_chars;
 	int lines_skipped;
 	int max_lines_visible;
+	
+	String wrapped_text;
 
 protected:
 	void _notification(int p_what);
@@ -104,6 +106,8 @@ protected:
 	static void _bind_methods();
 	// bind helpers
 public:
+	String get_wrapped_text() const;
+
 	virtual Size2 get_minimum_size() const;
 
 	void set_align(Align p_align);
