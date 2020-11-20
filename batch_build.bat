@@ -1,16 +1,21 @@
 ::calls the build commands for the editor, the debug template, the
 ::release template and the android template in succession.
-::optional first arg sets number of cores used (default 4)
-::literally googled 5 mins to learn batch scripting so...
-::but I mean it works.
+::At completion, all the good stuff will be in the bin/ folder
+::I have very little knowledge of batch scripting but... it works!
+::Each line that starts with "CALL scons" is a compilation command- I usually comment out 
+::all of them except the debug template after making a change to the code just to see if
+::it compiles (and runs) without error (I think there's a way to exit the script early if
+::a command exits with error but I've been too lazy to look into it).
 
 @echo off
 set /p num_cores="Number of cores to use: "
-echo .
-echo "Compiling editor..."
 
+echo. Compiling editor...
 CALL scons -j %num_cores% platform=windows target=release_debug 
-REM NOTE turn disable_3d off for 3d games!
+
+
+REM This chunk of arguments gets appended to all the export template compilation commands
+REM Here is where you decide what modules you don't need
 set batch_args= tools=no xml=no disable_3d=yes ^
      disable_advanced_gui=yes module_bullet_enabled=no builtin_bullet=no builtin_enet=no ^
      builtin_libtheora=no builtin_libvpx=no builtin_libwebp=no  builtin_recast=no ^
@@ -27,46 +32,46 @@ set batch_args= tools=no xml=no disable_3d=yes ^
 	 module_svg_enabled=no module_gdnative_enabled=no
  ::module_vorbis_enabled=no module_stb_vorbis_enabled=no
 	 
-	 
+	
 
 
 
-REM echo Compiling debug template...
-REM CALL scons -j %num_cores% platform=windows target=release_debug tools=no %batch_args%
-REM echo.	
+echo Compiling debug template...
+CALL scons -j %num_cores% platform=windows target=release_debug tools=no %batch_args%
+echo.	
  
-REM echo Compiling release template...
-REM CALL scons -j %num_cores% platform=windows target=release tools=no %batch_args%
-REM echo.
+echo Compiling release template...
+CALL scons -j %num_cores% platform=windows target=release tools=no %batch_args%
+echo.
 
-REM echo Compiling android debug template...
-REM echo.   - armv7
-REM CALL scons -j %num_cores% platform=android target=release_debug android_arch=armv7 %%batch_args%%
-REM echo.   - armv8
-REM CALL scons -j %num_cores% platform=android target=release_debug android_arch=arm64v8 %%batch_args%%
-REM echo.   - x86
-REM CALL scons -j %num_cores% platform=android target=release_debug android_arch=x86 %%batch_args%%
-REM echo.   - x86_64
-REM CALL scons -j %num_cores% platform=android target=release_debug android_arch=x86_64 %%batch_args%%
-REM cd platform/android/java
-REM CALL .\gradlew generateGodotTemplates
-REM cd ..
-REM cd ..
-REM cd ..
-REM echo.
+echo Compiling android debug template...
+echo.   - armv7
+CALL scons -j %num_cores% platform=android target=release_debug android_arch=armv7 %%batch_args%%
+echo.   - armv8
+CALL scons -j %num_cores% platform=android target=release_debug android_arch=arm64v8 %%batch_args%%
+echo.   - x86
+CALL scons -j %num_cores% platform=android target=release_debug android_arch=x86 %%batch_args%%
+echo.   - x86_64
+CALL scons -j %num_cores% platform=android target=release_debug android_arch=x86_64 %%batch_args%%
+cd platform/android/java
+CALL .\gradlew generateGodotTemplates
+cd ..
+cd ..
+cd ..
+echo.
 
-REM echo Compiling android release template...
-REM echo.   - armv7
-REM CALL scons -j %num_cores% platform=android target=release android_arch=armv7 %%batch_args%%
-REM echo.   - armv8
-REM CALL scons -j %num_cores% platform=android target=release android_arch=arm64v8 %%batch_args%%
-REM echo.   - x86
-REM CALL scons -j %num_cores% platform=android target=release android_arch=x86 %%batch_args%%
-REM echo.   - x86_64
-REM CALL scons -j %num_cores% platform=android target=release android_arch=x86_64 %%batch_args%%
-REM cd platform/android/java
-REM CALL .\gradlew generateGodotTemplates
-REM cd ..
-REM cd ..
-REM cd ..
-REM echo Finished batch build!
+echo Compiling android release template...
+echo.   - armv7
+CALL scons -j %num_cores% platform=android target=release android_arch=armv7 %%batch_args%%
+echo.   - armv8
+CALL scons -j %num_cores% platform=android target=release android_arch=arm64v8 %%batch_args%%
+echo.   - x86
+CALL scons -j %num_cores% platform=android target=release android_arch=x86 %%batch_args%%
+echo.   - x86_64
+CALL scons -j %num_cores% platform=android target=release android_arch=x86_64 %%batch_args%%
+cd platform/android/java
+CALL .\gradlew generateGodotTemplates
+cd ..
+cd ..
+cd ..
+echo Finished batch build!
