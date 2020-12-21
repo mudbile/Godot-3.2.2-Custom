@@ -64,7 +64,7 @@ public:
 
 	void set_text(const String &p_text);
 	String get_text() const;
-
+	
 	void set_icon(const Ref<Texture> &p_icon);
 	Ref<Texture> get_icon() const;
 

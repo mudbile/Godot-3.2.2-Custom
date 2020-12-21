@@ -10,8 +10,8 @@
 @echo off
 set /p num_cores="Number of cores to use: "
 
-echo. Compiling editor...
-CALL scons -j %num_cores% platform=windows target=release_debug 
+REM echo. Compiling editor...
+REM CALL scons -j %num_cores% platform=windows target=release_debug 
 
 
 REM This chunk of arguments gets appended to all the export template compilation commands
@@ -36,9 +36,9 @@ set batch_args= tools=no xml=no disable_3d=yes ^
 
 
 
-echo Compiling debug template...
-CALL scons -j %num_cores% platform=windows target=release_debug tools=no %batch_args%
-echo.	
+REM echo Compiling debug template...
+REM CALL scons -j %num_cores% platform=windows target=release_debug tools=no %batch_args%
+REM echo.	
  
 echo Compiling release template...
 CALL scons -j %num_cores% platform=windows target=release tools=no %batch_args%

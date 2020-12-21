@@ -628,6 +628,9 @@ void CPUParticles2D::_update_internal() {
 }
 
 void CPUParticles2D::_particles_process(float p_delta) {
+	if (speed_scale == 0){
+		return;
+	}
 
 	p_delta *= speed_scale;
 

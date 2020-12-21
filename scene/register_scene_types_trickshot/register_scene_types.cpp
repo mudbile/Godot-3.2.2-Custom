@@ -580,10 +580,11 @@ void register_scene_types() {
 	ClassDB::register_class<KinematicCollision2D>();
 	ClassDB::register_class<Polygon2D>();
 	ClassDB::register_class<RayCast2D>();
+	ClassDB::register_class<SpriteFrames>();
+	ClassDB::register_class<AnimatedSprite>();
 #ifndef ADVANCED_GUI_DISABLED
 		//ClassDB::register_type<ViewportSprite>();
-		ClassDB::register_class<SpriteFrames>();
-		ClassDB::register_class<AnimatedSprite>();
+		
 		ClassDB::register_class<Position2D>();
 		ClassDB::register_class<MeshInstance2D>();
 		ClassDB::register_class<MultiMeshInstance2D>();
